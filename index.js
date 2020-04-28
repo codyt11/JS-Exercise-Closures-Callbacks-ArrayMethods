@@ -38,7 +38,7 @@ function processFirstItem(stringList, callback) {
  * Implement a higher-order function called `processLength`.
  * It takes two arguments:
  * @param list an array with elements of any type.
- * @param callback function that takes a number as its argument.
+ * @param cb function that takes a number as its argument.
  * @returns the result of invoking `callback` passing the LENGTH of `list`.
  * 
  * Examples of usage of this higher-order function:
@@ -48,8 +48,8 @@ function processFirstItem(stringList, callback) {
  * [2] Invoking `processLength` passing `[]` and `(num) => "There are " + num`,
  * should return "There are 0".
 */
-function processLength(/* CODE HERE */) {
-  /* CODE HERE */
+function processLength(list, cb) {
+  return (cb(list.length));
 }
 
 /**
@@ -66,8 +66,8 @@ function processLength(/* CODE HERE */) {
  * Invoking `processLastItem` passing `['foo', 'bar']` and `(str) => str + str`,
  * should return 'barbar'.
 */
-function processLastItem(/* CODE HERE */) {
-  /* CODE HERE */
+function processLastItem(stringList, callback) {
+  return (callback(stringList[stringList.length -1]));
 }
 
 /**
@@ -78,7 +78,7 @@ function processLastItem(/* CODE HERE */) {
  * It takes three arguments:
  * @param num1 a number.
  * @param num2 a number.
- * @param callback function that takes a number as its argument.
+ * @param cb function that takes a number as its argument.
  * @returns the result of invoking `callback` passing the SUM of `num1` and `num2`.
  * 
  * Examples of usage of this higher-order function:
@@ -88,8 +88,8 @@ function processLastItem(/* CODE HERE */) {
  * [2] Invoking `processSum` passing `-5`, '-1', and `(num) => num + 1000`,
  * should return 994.
 */
-function processSum(/* CODE HERE */) {
-  /* CODE HERE */
+function processSum(num1, num2, cb) {
+  return (cb(num1 + num2));
 }
 
 /**
@@ -100,7 +100,7 @@ function processSum(/* CODE HERE */) {
  * It takes three arguments:
  * @param num1 a number.
  * @param num2 a number.
- * @param callback function that takes a number as its argument.
+ * @param cb function that takes a number as its argument.
  * @returns the result of invoking `callback` passing the PRODUCT of `num1` and `num2`.
  * 
  * Examples of usage of this higher-order function:
@@ -110,8 +110,8 @@ function processSum(/* CODE HERE */) {
  * [2] Invoking `processProduct` passing 25 and 0 and `(num) => num + 1000`,
  * should return 1000.
 */
-function processProduct(/* CODE HERE */) {
-  /* CODE HERE */
+function processProduct(num1, num2, cb) {
+  return cb(num1 * num2);
 }
 
 /**
@@ -122,7 +122,7 @@ function processProduct(/* CODE HERE */) {
  * Implement a higher-order function called `processDuplicateFree`.
  * It takes two arguments:
  * @param list array of elements of any kind.
- * @param callback function that takes an array as its argument.
+ * @param cb function that takes an array as its argument.
  * @returns the result of invoking `callback` passing a de-duped version of `list`.
  * 
  * Examples of usage of this higher-order function:
@@ -131,9 +131,10 @@ function processProduct(/* CODE HERE */) {
  * 
  * [2] Invoking `processDuplicateFree` passing `[1,1,2,2,3]` and `(arr) => arr.length`,
  * should return 3.
-*/
-function processDuplicateFree(/* CODE HERE ONLY AFTER COMPLETING ALL OTHER TASKS */) {
-  /* CODE HERE ONLY AFTER COMPLETING ALL OTHER TASKS */
+**/
+
+function processDuplicateFree(list, callback) {
+  return callback(list.filter((item, index) => list.indexOf(item) === index));
 }
 
 /////////////// HIGHER-ORDER ARRAY METHODS ///////////////
@@ -146,7 +147,7 @@ function processDuplicateFree(/* CODE HERE ONLY AFTER COMPLETING ALL OTHER TASKS
  * @instructions
  * Implement this function using forEach().
  * 
- * @param strings an array of strings.
+ * @param string an array of strings.
  * @returns an array of equal length to `strings` containing lowercased versions of each string.
  * 
  * 
@@ -155,9 +156,15 @@ function processDuplicateFree(/* CODE HERE ONLY AFTER COMPLETING ALL OTHER TASKS
  * 
  * [2] Invoking `lowerCaseStrings` with `['a', 'b', 'c' ]` will return `[ 'a', 'b', 'c' ]`.
 */
-function lowerCaseStrings(/* code here */) {
-  /* code here */
+function lowerCaseStrings(strings) {
+  let newStrings = [];
+  strings.forEach(function(item) {
+    newStrings.push(item.toLowerCase());
+  });
+  return newStrings;
 }
+
+
 
 /**
  * ### Challenge `isItAnApple`
@@ -174,8 +181,15 @@ function lowerCaseStrings(/* code here */) {
  * 
  * [2] Invoking `isItAnApple` with `['a', 'b', 'c' ]` will return `[ false, false, false ]`.
 */
-function isItAnApple(/* code here */) {
-  /* code here */
+function isItAnApple(strings) {
+  return strings.map(function(item){
+      if(item != 'apple'){
+        return false;
+      } else{
+        return true;
+      }
+    
+  });
 }
 
 /**
@@ -194,8 +208,14 @@ function isItAnApple(/* code here */) {
  * 
  * [2] Invoking `removeApple` with `['a', 'b', 'c' ]` will return `[ 'a', 'b', 'c' ]`.
 */
-function removeApple(/* code here */) {
-  /* code here */
+function removeApple(strings) {
+  let newStrings = [];
+  strings.filter(function(item){
+    if (item !== 'apple'){
+      newStrings.push(item);
+    }
+  });
+  return newStrings;
 }
 
 /**
@@ -213,8 +233,8 @@ function removeApple(/* code here */) {
  * 
  * [2] Invoking `stringSmash` with `['a', 'b', 'c' ]` will return `abc`.
 */
-function stringSmash(/* code here */) {
-  /* code here */
+function stringSmash(strings) {
+  return strings.reduce((all,value) => all + value)
 }
 
 // A local community center is holding a fund raising 5k fun run and has invited
@@ -232,8 +252,12 @@ function stringSmash(/* code here */) {
  * @returns an array with all the runners' full names in the following format: "Smith, John".
  * The full names appear in the array in the same order the runners appear in the `runners` array.
 */
-function getFullNames(/* CODE HERE */) {
-  /* CODE HERE */
+let fullNames = [];
+function getFullNames(runners) {
+  runners.forEach(function(item){
+    fullNames.push(`${item.last_name}, ${item.first_name}`);
+  });
+  return (fullNames);
 }
 
 /**
